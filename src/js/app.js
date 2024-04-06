@@ -9,7 +9,7 @@ import "../style/index.css";
         background: "https://images.unsplash.com/photo-1511974035430-5de47d3b95da", // this is the image's url that will be used as a background for the profile cover
         avatarURL: "https://randomuser.me/api/portraits/women/42.jpg", // this is the url for the profile avatar
         socialMediaPosition: "right", // social media bar position (left or right)
-        
+
         twitter: null, // social media usernames
         github: null,
         linkedin: null,
@@ -23,8 +23,7 @@ import "../style/index.css";
     }
  */
 function render(variables = {}) {
-  if (variables.name === null)
-    console.log("These are the current variables: ", variables); // print on the console
+  console.log("These are the current variables: ", variables); // print on the console
   // here we ask the logical questions to make decisions on how to build the html
   // if includeCover==false then we reset the cover code without the <img> tag to make the cover transparent.
   let cover = `<div class="cover"><img src="${variables.background}" /></div>`;
@@ -32,19 +31,27 @@ function render(variables = {}) {
 
   // reset the website body with the new html output
   document.querySelector("#widget_content").innerHTML = `<div class="widget">
-            ${cover}
-          <img src="${variables.avatarURL}" class="photo" />
-          <h1>${variables.name} ${variables.lastName}</h1>
-          <h2>${variables.role}</h2>
-          <h3>${variables.city}, ${variables.country}</h3>
-          <ul class="position-right">
-            <li><a href="https://twitter.com/4geeksacademy"><i class="fab fa-twitter"></i></a></li>
-            <li><a href="https://github.com/4geeksacademy"><i class="fab fa-github"></i></a></li>
-            <li><a href="https://linkedin.com/school/4geeksacademy"><i class="fab fa-linkedin"></i></a></li>
-            <li><a href="https://instagram.com/4geeksacademy"><i class="fab fa-instagram"></i></a></li>
-          </ul>
-        </div>
-    `;
+                ${cover}
+              <img src="${variables.avatarURL}" class="photo" />
+              <h1>${variables.name ? variables.name : "Name"} ${
+    variables.lastName ? variables.lastName : "Last Name"
+  }</h1>
+              <h2>${variables.role ? variables.role : "role"}</h2>
+              <h3>${variables.city ? variables.city : "City"}, ${
+    variables.country ? variables.country : "Country"
+  }</h3>
+  <ul class="${
+    variables.socialMediaPosition === "right"
+      ? "position-right"
+      : "position-left"
+  }">
+                <li><a href="https://twitter.com/4geeksacademy"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="https://github.com/4geeksacademy"><i class="fab fa-github"></i></a></li>
+                <li><a href="https://linkedin.com/school/4geeksacademy"><i class="fab fa-linkedin"></i></a></li>
+                <li><a href="https://instagram.com/4geeksacademy"><i class="fab fa-instagram"></i></a></li>
+              </ul>
+            </div>
+        `;
 }
 
 /**
